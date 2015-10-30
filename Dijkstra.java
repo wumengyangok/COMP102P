@@ -18,7 +18,6 @@ public class Main{
                 min = dist[i];
             }
         }
-        //System.out.println(nearestNode);
         return nearestNode;
     }
     public static void dijkstra(Node[] node){
@@ -34,7 +33,6 @@ public class Main{
         }
     }
 	public static void main(String[] args) {
-        //System.out.println("Hello, java!");
         //DijkstraJava
         System.out.print("Please input the number of nodes, edges and beginner:");
         //Input input=new Input();
@@ -46,11 +44,9 @@ public class Main{
         for (int i = 0; i <numN ; i++) {
             node[i]=new Node();
         }
-        //System.out.println(node[2].numNeighbor);
-        //System.out.println("Please input the edges(formation:start end weight):");
+
         for (int i = 0; i <numE ; i++) {
             int start,end,weight;
-            //System.out.print("Please input the edges(formation:start end weight):");
             start=scanner.nextInt();
             end=scanner.nextInt();
             weight=scanner.nextInt();
@@ -58,7 +54,6 @@ public class Main{
             node[start].nameNeighbor[node[start].numNeighbor]=end;
             node[start].weight[node[start].numNeighbor]=weight;
         }
-        //System.out.println(node[0].numNeighbor+" "+node[1].numNeighbor+" "+node[3].numNeighbor);
         for (int i = 0; i <numN ; i++) {
             if(i!=startNode){
                 visit[i]=false;
