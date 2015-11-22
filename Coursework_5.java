@@ -13,15 +13,6 @@ public class Main {
         if(ch == '1') return '0';
         else return '1';
     }
-    public static String getStringWithLengthAndFilledWithCharacter(int length, char charToFill) {
-        char[] array = new char[length];
-        int pos = 0;
-        while (pos < length) {
-            array[pos] = charToFill;
-            pos++;
-        }
-        return new String(array);
-    }
     public static String solve(String status, int n){
         char[] _new=new char[17];
         for (int i = 0; i <= 15 ; i++) {
