@@ -1,0 +1,6 @@
+(((X[zx]^X[yy])^(X[xz]^X[xy]))^((X[zz]^X[yy])^(X[yy]^X[yy])))
+X[yz]
+(AxX[xz]>-EzX[zz])
+Ez(X[xz]>-(X[zx]^X[yy]))
+X[x]
+((ExX[xx]vAxEX[xy])^(X[yy]vX[zy]))
