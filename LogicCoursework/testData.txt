@@ -3,4 +3,33 @@ X[yz]
 (AxX[xz]>-EzX[zz])
 Ez(X[xz]>-(X[zx]^X[yy]))
 X[x]
-((ExX[xx]vAxEX[xy])^(X[yy]vX[zy]))
+((ExX[xx]vAxExX[xy])^(X[yy]vX[zy]))
+
+/*  The main program calls procedures parse, partone, parttwo and bin which are not implemented here.
+*/
+// X[] - EA ^ v > () 
+// check formula:
+// for X: 
+// only followed by [ is true
+// after that 
+// check xy pattern 
+// wait for a ]
+// for EA:
+// only followed by x,y or z is true
+// after that 
+// check formula
+// for (:
+//   find the middle ^ v >
+//   check formula1 and formula2
+//   wait another )
+// for -:
+// eat it and then check formula
+
+AxEyX[xy]
+AxEyX[yx]
+ExAyX[yx]
+(X[xy]>-X[yx])
+0 1
+0 2
+1 2
+2 2
