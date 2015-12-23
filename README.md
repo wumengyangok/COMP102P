@@ -1,2 +1,2 @@
-# COMP102P
-Solutions for Theory_I UCL_CS.
+# COMP102P/COMP104P
+Solutions for Theory_I Theory_II UCL_CS.
