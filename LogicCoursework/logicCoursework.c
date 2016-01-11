@@ -2,9 +2,9 @@
 #include <string.h>   /* for all the new-fangled string functions */
 #include <stdlib.h>     /* malloc, free, rand */
 
-int Fsize=200;  /*big enough for our formulas*/
-char * middle1 = NULL;
-char * tail1 = NULL;
+int Fsize = 200;  /*big enough for our formulas*/
+char * middleAll = NULL;
+char * tailAll = NULL;
 char * _middle = NULL;
 int layer = 0;
 char partOne[50];
@@ -24,7 +24,7 @@ int parseXYZ(char *g)
 
 int parseParenthesis(char *g)
 {
-    
+
     int height = 0;
     while((!((height == 1)&&((*g == '^')||(*g == 'v')||(*g == '>'))))&&(*g != '\0'))
     {
@@ -50,10 +50,10 @@ int parseParenthesis(char *g)
         return 0;
     }else
     {
-        middle1 = g;
+        middleAll = g;
     }
     g++;
-    while((*g != '\0')&&(height>0))
+    while ((*g != '\0')&&(height>0))
     {
         if (*g == '(')
         {
@@ -74,9 +74,9 @@ int parseParenthesis(char *g)
     }
     if ((*g == '\0')&&(*(g-1) == ')'))
     {
-        tail1 = g-1;
+        tailAll = g-1;
         return 1;
-    }else
+    } else
     {
         return 0;
     }
@@ -132,12 +132,12 @@ int parse(char *g)
             if (parseParenthesis(g))
             {
                 layer++;
-                middle = middle1;
+                middle = middleAll;
                 if (layer == 1)
                 {
                     _middle = middle;
                 }
-                tail = tail1;
+                tail = tailAll;
                 temp = *middle;
                 *middle = '\0';
                 *tail = '\0';
@@ -146,6 +146,8 @@ int parse(char *g)
                 {
                     *middle = temp;
                     *tail = ')';
+                    middleAll = middle;
+                    tailAll = tail;
                     return 3;
                 }else
                 {
@@ -223,10 +225,13 @@ int interpret(char variable){
 int eval(char *nm, int edges[no_edges][2], int size, int V[3])
 /*this method takes a formula, the list of edges of a graph, the number of vertices and a variable assignment.  It then evaluates the formula and returns 1 or 0 as appropriate.  */
 {
+    int v[3] = {
+        V[0], V[1], V[2]
+    };
     int flag;
-    char *middle = middle1;
-    char *tail = tail1;
-    char temp;
+    char *middle = NULL;
+    char *tail = NULL;
+    char temp = '\0';
     if(middle != NULL)
         temp = *middle;
     int part1, part2;
@@ -236,7 +241,7 @@ int eval(char *nm, int edges[no_edges][2], int size, int V[3])
             flag = 0;
             for (int i = 0; i < no_edges; ++i)
             {
-                if ((edges[i][0] == V[interpret(*(nm + 2))]) && (edges[i][1] == V[interpret(*(nm + 3))]))
+                if ((edges[i][0] == v[interpret(*(nm + 2))]) && (edges[i][1] == v[interpret(*(nm + 3))]))
                 {
                     flag = 1;
                 }
@@ -249,22 +254,25 @@ int eval(char *nm, int edges[no_edges][2], int size, int V[3])
             }
             break;
         case 2:
-            return !eval(++nm,edges,size,V);
+            return !eval(++nm,edges,size,v);
             break;
         case 3:
+            middle = middleAll;
+            tail = tailAll;
+            temp = *middle;
             *middle = '\0';
+            part1 = eval(nm+1,edges,size,v);
             *tail = '\0';
-            part1 = eval(nm+1,edges,size,V);
-            part2 = eval(middle1+1,edges,size,V);
+            part2 = eval(middle+1,edges,size,v);
             *middle = temp;
             *tail = ')';
-            switch(*middle1)
-            {
-                case '^': return (part1 && part2);break;
-                case 'v': return (part1 || part2);break;
-                case '>': return (!part1 || part2);break;
-                default: break;
-            }
+            switch(*middleAll)
+        {
+            case '^': return (part1 && part2);break;
+            case 'v': return (part1 || part2);break;
+            case '>': return (!part1 || part2);break;
+            default: break;
+        }
             break;
         case 4:
             flag = 0;
@@ -272,22 +280,22 @@ int eval(char *nm, int edges[no_edges][2], int size, int V[3])
                 case 'x':
                     for (int i = 0; i < no_nodes; ++i)
                     {
-                        V[0] = i;
-                        flag |= eval(nm+2,edges,size,V);
+                        v[0] = i;
+                        flag |= eval(nm+2,edges,size,v);
                     }
                     break;
                 case 'y':
                     for (int i = 0; i < no_nodes; ++i)
                     {
-                        V[1] = i;
-                        flag |= eval(nm+2,edges,size,V);
+                        v[1] = i;
+                        flag |= eval(nm+2,edges,size,v);
                     }
                     break;
                 case 'z':
                     for (int i = 0; i < no_nodes; ++i)
                     {
-                        V[2] = i;
-                        flag |= eval(nm+2,edges,size,V);
+                        v[2] = i;
+                        flag |= eval(nm+2,edges,size,v);
                     }
                     break;
                 default: break;
@@ -300,22 +308,22 @@ int eval(char *nm, int edges[no_edges][2], int size, int V[3])
                 case 'x':
                     for (int i = 0; i < no_nodes; ++i)
                     {
-                        V[0] = i;
-                        flag &= eval(nm+2,edges,size,V);
+                        v[0] = i;
+                        flag &= eval(nm+2,edges,size,v);
                     }
                     break;
                 case 'y':
                     for (int i = 0; i < no_nodes; ++i)
                     {
-                        V[1] = i;
-                        flag &= eval(nm+2,edges,size,V);
+                        v[1] = i;
+                        flag &= eval(nm+2,edges,size,v);
                     }
                     break;
                 case 'z':
                     for (int i = 0; i < no_nodes; ++i)
                     {
-                        V[2] = i;
-                        flag &= eval(nm+2,edges,size,V);
+                        v[2] = i;
+                        flag &= eval(nm+2,edges,size,v);
                     }
                     break;
                 default: break;
