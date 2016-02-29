@@ -51,6 +51,10 @@ public class BTree {
                 child.setFather(this);
         }
 
+        public void deleteChildren(int index) {
+            children.remove(index);
+        }
+
         public boolean ifOverflew() {
             return leaves.size() > maximumLeafNumber;
         }
@@ -72,8 +76,9 @@ public class BTree {
         LinkedList<Integer> leaves = page.getLeaves();
         LinkedList<Page> children = page.getChildren();
         if (father == null) {
-            root = new Page(null, 0, 2 * n);
-            father = root;
+            father = new Page(null, 0, 2 * n);
+            father.addChildren(root.getChildren().get(0), 0);
+            root = father;
         }
         int index = father.addValue(page.getLeaves().get(n));
         Page left = new Page(father, n, 2 * n);
@@ -86,6 +91,7 @@ public class BTree {
             right.addChildren(children.get(i), right.addValue(leaves.get(i)) - 1);
         }
         right.addChildren(children.get(2 * n + 1), n);
+        father.deleteChildren(index - 1);
         father.addChildren(left, index - 1);
         father.addChildren(right, index);
 
