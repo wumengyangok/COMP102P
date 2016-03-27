@@ -1,0 +1,20 @@
+(X[xy]^X[yx]) 5 4 0 1 0 2 0 3 0 4 0 1 2									a binary connective formula		false	3
+(X[xy]^X[yx]) 5 7 0 1 0 2 0 3 0 4 1 0 3 0 4 0 0 1 2						a binary connective formula		true	3
+(X[xy]^X[yx]) 5 7 0 1 0 2 0 3 0 4 1 0 3 0 4 0 1 2 3						a binary connective formula		false	3
+(X[xy]^X[yx]) 6 9 0 1 0 2 1 0 1 2 2 0 2 1 3 4 5 3 5 4 0 1 2				a binary connective formula		true	3
+(X[xy]^X[yx]) 6 9 0 1 0 2 1 0 1 2 2 0 2 1 3 4 5 3 5 4 3 4 5				a binary connective formula		false	3
+((X[xy]^X[yz])>-X[zx]) 5 7 0 1 0 2 0 3 0 4 1 0 3 0 4 0 0 1 2			a binary connective formula		true	3 X
+((X[xy]^X[yz])>-X[zx]) 5 7 0 1 0 2 0 3 0 4 1 0 3 0 4 0 1 2 3			a binary connective formula		true	3 X
+((X[xy]^X[yz])>-X[zx]) 6 9 0 1 0 2 1 0 1 2 2 0 2 1 3 4 5 3 5 4 1 2 3	a binary connective formula		true	3 X
+((X[xy]^X[yz])>-X[zx]) 6 9 0 1 0 2 1 0 1 2 2 0 2 1 3 4 5 3 5 4 0 1 2	a binary connective formula		false	3
+((X[xy]^X[yz])>-X[zx]) 6 9 0 1 0 2 1 0 1 2 2 0 2 1 3 4 5 3 5 4 2 1 0	a binary connective formula		false	3
+Ey(X[xy]^X[yx]) 5 4 0 1 0 2 0 3 0 4 0 1 2								an existential formula			false	3
+Ey(X[xy]^X[yx]) 5 7 0 1 0 2 0 3 0 4 1 0 3 0 4 0 0 1 2					an existential formula			true	3
+Ey(X[xy]^X[yx]) 6 9 0 1 0 2 1 0 1 2 2 0 2 1 3 4 5 3 5 4 0 1 2			an existential formula			true	3
+ExAz-X[zx] 5 7 0 1 0 2 0 3 0 4 1 0 3 0 4 0 1 2 3						an existential formula			false	3
+ExAz-X[zx] 6 9 0 1 0 2 1 0 1 2 2 0 2 1 3 4 5 3 5 4 1 2 3				an existential formula			false	3
+AxAy(X[xy]v-X[yx]) 5 4 0 1 0 2 0 3 0 4 0 1 2							a universal formula 			false	3 X
+AxAy(X[xy]v-X[yx]) 5 7 0 1 0 2 0 3 0 4 1 0 3 0 4 0 3 0 4				a universal formula				false	3
+AzX[zz] 5 4 0 1 0 2 0 3 0 4 3 0 4										a universal formula				false	3
+AzX[zz] 5 7 0 1 0 2 0 3 0 4 1 0 3 0 4 0 1 2 3							a universal formula				false	3
+AzX[zz] 6 9 0 1 0 2 1 0 1 2 2 0 2 1 3 4 5 3 5 4 0 1 2					a universal formula				false	3
