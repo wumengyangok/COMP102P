@@ -1,8 +1,9 @@
 R = []
 S = []
+G = [[], [2, 5, 6], [1, 3, 4], [2, 4, 5, 6], [2, 3, 5, 6], [1, 3, 4, 6], [1, 3, 4, 5]]
 # G = [[], [2, 5, 6], [1, 3, 4], [2, 5], [2, 6], [1, 3, 6], [1, 4, 5]]
 # G = [[], [2, 3], [1, 3], [1, 2, 4], [3]]
-G = [[], [2, 3, 4], [1, 3, 4], [1, 2, 4, 5], [1, 2, 3, 5], [3, 4]]
+# G = [[], [2, 3, 4], [1, 3, 4], [1, 2, 4, 5], [1, 2, 3, 5], [3, 4]]
 
 def __reduce_to__(P, v):
     remove_list = []
@@ -45,6 +46,23 @@ def swarm(P, X):
             X.append(v)
     return
 
+def count(freq, S):
+    maximum = 0
+    for item in S:
+        for v in item:
+            freq[v] += 1
+            if freq[v] > maximum:
+                maximum = freq[v]
+    return maximum
 
-swarm([1, 2, 3, 4, 5], [])
+swarm([1, 2, 3, 4, 5, 6], [])
+
+freq = [0, 0, 0, 0, 0, 0, 0]
+ans = []
+maximum = count(freq, S)
+for i in range(len(freq)):
+    if freq[i] is maximum:
+        ans.append(i)
+
 print(S)
+print(ans)
